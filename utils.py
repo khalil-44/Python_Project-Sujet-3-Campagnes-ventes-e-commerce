@@ -2,6 +2,7 @@
 import csv
 import numpy as np
 import pandas as pd
+import openpyxl 
 # fonction 1: qui servira à la leecture du fichier CSV "Online Retail.csv"
 def lire_fichier_csv(nom_fichier):
     
@@ -61,7 +62,7 @@ def calculer_stats(Tableau):
 #Export du top 10 des pays par CA.
 
 #fonction 5: qui va charger le fichier CSV dans un DataFrame Pandas 
-def charger_csv_dataframe(nom_fichier):
+def charger_csv_dataframe(nom_fichier,):
     df = pd.read_csv(nom_fichier, sep=';', encoding='utf-8')
     return df
 
@@ -70,17 +71,23 @@ def charger_csv_dataframe(nom_fichier):
 # Creer la colonne Montant = Quantity * UnitPrice
 def nettoyer_dataframe(df):
     df = df.copy()  # on crée une copie du DataFrame pour éviter de modifier l'original
+    df["UnitPrice"] = df["UnitPrice"].str.replace(",", ".")
+    cols = ['Quantity', "UnitPrice"]
     df['InvoiceDate'] = pd.to_datetime(df['InvoiceDate'], errors='coerce')  # convertir la colonne InvoiceDate en datetime
+    df[cols] = df[cols].apply(pd.to_numeric)
     df = df.dropna(subset=['CustomerID'])  # retirer les lignes sans CustomerID
     df = df[(df['Quantity'] >= 0) & (df['UnitPrice'] > 0)]  # retirer les annulations Quantity < 0 et les UnitPrice <= 0
     df['Montant'] = df['Quantity'] * df['UnitPrice']  # creer la colonne Montant = Quantity * UnitPrice
     return df
 
 #fonction 7: segmenter le dataframe : commandes d'un pays donné, montants > 100
-def segmenter_dataframe(df, pays, montant_min=100):
-    df_segment = df[(df['Country'] == pays) & (df['Montant'] > montant_min)]  # segmenter le dataframe
-    return df_segment
+def segmenter_par_pays(df, pays):
+    df_pays_donne = df[df['Country'] == pays]  # pour connaitre les commandes d'un pays donné
+    return df_pays_donne
 
+def segmenter_par_seuil_mont(df, seuil=100):
+     segment_seuil = df[df["Montant"] > seuil]  # segmentation selon un seuil defini
+     return segment_seuil
 # fonction 8: calculer le chiffre d'affaires par pays
 def chiffre_affaires_par_pays(df):
     ca_par_pays = df.groupby('Country')['Montant'].sum().sort_values(ascending=False)  # groupby("Country") → chiffre d'affaires par pays

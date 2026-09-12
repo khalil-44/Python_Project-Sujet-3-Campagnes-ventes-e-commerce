@@ -1,39 +1,51 @@
 #============Script de la V2===========
-##DataFrame, to_datetime(InvoiceDate), retirer les lignes sans CustomerID.
-#Segmenter : commandes d'un pays donné, montants > 100.
-#groupby("Country") → chiffre d'affaires par pays ; pivot_table Country × mois.
-#Export du top 10 des pays par CA
-import pandas as pd
-# Charger le fichier CSV dans un DataFrame Pandas
-df = pd.read_csv("Online Retail.csv")
+from utils import (charger_csv_dataframe, 
+                   nettoyer_dataframe, 
+                   segmenter_par_pays,
+                   segmenter_par_seuil_mont,
+                   chiffre_affaires_par_pays,
+                   tableau_croise_pays_mois,
+                   exporter_top10_pays_ca)
 
-# InvoiceDate en datetime, retirer les lignes sans CustomerID
-df['InvoiceDate'] = pd.to_datetime(df['InvoiceDate'])
-df = df.dropna(subset=['CustomerID'])
+def main():
+    print("=============== Resultats des Analyses ===============")
+    # charger Online Retail.csv
+    dataframe = charger_csv_dataframe("Online Retail.csv")
 
-# Retirer les annulations Quantity < 0 et les UnitPrice <= 0
-df = df[(df['Quantity'] >= 0) & (df['UnitPrice'] > 0)]
-# Créer la colonne Montant = Quantity * UnitPrice
-df['Montant'] = df['Quantity'] * df['UnitPrice']
+    # nettoyage du dataframe
+    df_nettoye = nettoyer_dataframe(dataframe)
 
-# Segmenter : commandes d'un pays donné, montants > 100
-df_segment = df[(df['Country'] == 'United Kingdom') & (df['Montant'] > 100)]
+    # segmenter le dataframe selon United kingdom
 
-# Chiffre d'affaires par pays
-ca_par_pays = df.groupby('Country')['Montant'].sum().sort_values(ascending=False)
+    df_uk = segmenter_par_pays(df_nettoye, pays = "United Kingdom")
+    print(f"\nNombre de commandes en France : {len(df_uk)}")
 
-# Pivot_table Country × mois
-df['Mois'] = df['InvoiceDate'].dt.to_period('M')
-pivot_table = pd.pivot_table(df, values='Montant', index='Country', columns='Mois', aggfunc='sum', fill_value=0)
+    # Commandes dont le montant superieur à 100
 
-# Export du top 10 des pays par CA(fichier excel)
-top_10_ca = ca_par_pays.head(10)
-top_10_ca.to_excel("top_10_ca.xlsx")
+    df_grosses_commandes = segmenter_par_seuil_mont(df_nettoye)
+    print("\nNombre de commandes > 100 : {len(df_grosses_commandes)}")
 
-# Affichage des résultats
-print("Chiffre d'affaires par pays :")
-print(ca_par_pays)
-print("\nPivot_table Country × mois :")
-print(pivot_table)
-print("\nTop 10 des pays par chiffre d'affaires :")
-print(top_10_ca)
+    # calcul du chiffres d'affaires par pays
+    print("\nChiffre d'Afffaires par Pays:")
+    print("\n")
+    print(f"{chiffre_affaires_par_pays(df_nettoye)}")
+
+    # Creation du tableau croisé dynamique : country x mois
+    print("\n Chiffre par pays à chaque Mois:")
+    print("\n")
+    print(tableau_croise_pays_mois(df_nettoye))
+
+
+    # Export du top 10 des pays par CA
+    exporter_top10_pays_ca(df_nettoye, nom_fichier= "top 10 CA par pays.xlsx")
+
+
+if __name__ == "__main__":
+    main()
+
+# Fin du script V2
+
+
+
+
+
