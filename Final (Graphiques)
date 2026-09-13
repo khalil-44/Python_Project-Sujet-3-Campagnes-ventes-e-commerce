@@ -8,63 +8,27 @@ df = df.dropna(subset=["CustomerID"])
 df["Revenue"] = df["Quantity"] * df["UnitPrice"]
 df["Month"] = df["InvoiceDate"].dt.to_period("M")
 
-# Fonctions graphiques
-def ca_par_pays():
-    top10 = df.groupby("Country")["Revenue"].sum().sort_values(ascending=False).head(10)
-    top10.plot(kind="bar", figsize=(8,5), title="Top 10 CA par pays")
-    plt.ylabel("Chiffre d'affaires")
-    plt.show()
+# 1. Barres du CA par pays (Top 10)
+top10 = df.groupby("Country")["Revenue"].sum().sort_values(ascending=False).head(10)
+top10.plot(kind="bar", title="Top 10 CA par pays")
+plt.show()
 
-def ventes_par_mois():
-    monthly = df.groupby("Month")["Revenue"].sum()
-    monthly.plot(kind="line", marker="o", figsize=(8,5), title="CA par mois")
-    plt.ylabel("Chiffre d'affaires")
-    plt.show()
+# 2. Courbe du CA par mois
+monthly = df.groupby("Month")["Revenue"].sum()
+monthly.plot(kind="line", marker="o", title="CA par mois")
+plt.show()
 
-def histogramme_commandes():
-    df["Revenue"].plot(kind="hist", bins=50, figsize=(8,5), title="Histogramme des montants de commande")
-    plt.xlabel("Montant commande")
-    plt.show()
+# 3. Histogramme des montants de commande
+df["Revenue"].plot(kind="hist", bins=50, title="Histogramme des montants")
+plt.show()
 
-def boxplot_paniers():
-    df.boxplot(column="Revenue", by="Country", figsize=(10,6))
-    plt.title("Boxplot des paniers par pays")
-    plt.suptitle("")  # enlever le titre automatique
-    plt.ylabel("Montant commande")
-    plt.show()
+# 4. Boxplot des paniers par pays
+df.boxplot(column="Revenue", by="Country")
+plt.title("Boxplot des paniers par pays")
+plt.suptitle("")
+plt.show()
 
-def exporter_top10():
-    top10 = df.groupby("Country")["Revenue"].sum().sort_values(ascending=False).head(10)
-    top10.to_excel("top10_countries.xlsx", index=False)
-    print("✅ Exporté vers top10_countries.xlsx")
+# Export Top 10
+top10.to_excel("top10_countries.xlsx", index=False)
+print("✅ Exporté vers top10_countries.xlsx")
 
-# Menu principal
-def menu():
-    while True:
-        print("\n--- MENU ---")
-        print("1. CA par pays (Top 10)")
-        print("2. Ventes par mois")
-        print("3. Histogramme des montants")
-        print("4. Boxplot des paniers par pays")
-        print("5. Exporter Top 10 pays")
-        print("6. Quitter")
-
-        choix = input("Choisissez une option : ")
-        if choix == "1":
-            ca_par_pays()
-        elif choix == "2":
-            ventes_par_mois()
-        elif choix == "3":
-            histogramme_commandes()
-        elif choix == "4":
-            boxplot_paniers()
-        elif choix == "5":
-            exporter_top10()
-        elif choix == "6":
-            print("Au revoir 👋")
-            break
-        else:
-            print("Option invalide, réessayez.")
-
-if __name__ == "__main__":
-    menu()
