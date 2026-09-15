@@ -49,7 +49,7 @@ tableau_filtre = filtrer_quantites_unitprices(tableau)
 tableau_final = calculer_montant(tableau_filtre)
 panier_moyen, quantite_mediane, montant_total = calculer_stats(tableau_final)
 
-print(f"  Lignes valides (V1)   : {len(tableau_final)} / {len(lignes)}")
+
 print(f"  Panier moyen          : {panier_moyen:.2f} £")
 print(f"  Quantité médiane      : {quantite_mediane:.2f}")
 print(f"  Montant total         : {montant_total:,.2f} £\n")
@@ -109,7 +109,7 @@ while True:
                 for pays in top_pays
             ]
             fig, ax = plt.subplots(figsize=(11, 6))
-            ax.boxplot(data, labels=top_pays, showfliers=True)
+            ax.boxplot(data, tick_labels = top_pays, showfliers=True)
             ax.set_title(f"Distribution des paniers par pays (Top {len(top_pays)} par CA)")
             ax.set_xlabel("Pays")
             ax.set_ylabel("Montant du panier (£)")

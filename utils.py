@@ -3,6 +3,8 @@ import csv
 import numpy as np
 import pandas as pd
 import openpyxl 
+import matplotlib.pyplot as plt
+
 # fonction 1: qui servira à la leecture du fichier CSV "Online Retail.csv"
 def lire_fichier_csv(nom_fichier):
     
@@ -13,17 +15,29 @@ def lire_fichier_csv(nom_fichier):
            
 # fonction 2: qui servira à la conversion des colonnes Quantity et UnitPrice en tableaux NumPy et création de la colonne Montant = Quantity * UnitPrice
 # Pour cela on extrait les colonnes Quantity et UnitPrice du fichier CSV PUIS on les convertit en tableaux NumPy et on calcule la colonne Montant
-def extraire_Quantity_UnitPrice(lignes, nom_colonne_quantity='Quantity',nom_colonne_unitprice='UnitPrice'):
-     colones_2d =[]
-     for ligne in lignes:
-         try:                                 # permet de gérer les erreurs si les colonnes ne sont pas présentes ou si les valeurs ne sont pas convertibles en int ou float
-             q=int(ligne[nom_colonne_quantity])    
-             p=float(ligne[nom_colonne_unitprice])
-         except (KeyError, TypeError, ValueError):
-             continue
-         colones_2d.append([q,p])# on ajoute les valeurs converties à la liste colones_2d
-         Tableau = np.array(colones_2d) # on convertit la liste en tableau NumPy(de 2 dimensions)
-     return Tableau 
+#def extraire_Quantity_UnitPrice(lignes, nom_colonne_quantity='Quantity',nom_colonne_unitprice='UnitPrice'):
+     #colones_2d =[]
+     #for ligne in lignes:
+         #try:                                 # permet de gérer les erreurs si les colonnes ne sont pas présentes ou si les valeurs ne sont pas convertibles en int ou float
+             #q=int(ligne[nom_colonne_quantity])    
+             #p=float(ligne[nom_colonne_unitprice])
+         #xcept (KeyError, TypeError, ValueError):
+             #continue
+         #colones_2d.append([q,p])# on ajoute les valeurs converties à la liste colones_2d
+         #Tableau = np.array(colones_2d) # on convertit la liste en tableau NumPy(de 2 dimensions)
+     #return Tableau 
+def extraire_Quantity_UnitPrice(lignes, nom_colonne_quantity='Quantity', nom_colonne_unitprice='UnitPrice'):
+    colones_2d = []
+    for ligne in lignes:
+        try:
+            q = int(ligne[nom_colonne_quantity])
+            prix_str = ligne[nom_colonne_unitprice].replace(",", ".")  # <-- le correctif
+            p = float(prix_str)
+        except (KeyError, TypeError, ValueError):
+            continue
+        colones_2d.append([q, p])
+    Tableau = np.array(colones_2d)
+    return Tableau
 # La conversion est terminée
 # Maintenant on va filtrer les Quantites < 0 et les UnitPrice <= 0 après on cree la colonne Montant = Quantity * UnitPrice
 
@@ -106,3 +120,7 @@ def exporter_top10_pays_ca(df, nom_fichier):
     return file_exported
 
 ########### Fin des fonctions pour la V2 DU Projet ############
+
+############### Fonctions pour la version finale ##############
+
+

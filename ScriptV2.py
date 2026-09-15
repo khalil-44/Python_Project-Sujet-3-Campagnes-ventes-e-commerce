@@ -18,12 +18,12 @@ def main():
     # segmenter le dataframe selon United kingdom
 
     df_uk = segmenter_par_pays(df_nettoye, pays = "United Kingdom")
-    print(f"\nNombre de commandes en France : {len(df_uk)}")
+    print(f"\nNombre de commandes en United kingdom : {len(df_uk)}")
 
     # Commandes dont le montant superieur à 100
 
     df_grosses_commandes = segmenter_par_seuil_mont(df_nettoye)
-    print("\nNombre de commandes > 100 : {len(df_grosses_commandes)}")
+    print(f"\nNombre de commandes > 100 : {len(df_grosses_commandes)}")
 
     # calcul du chiffres d'affaires par pays
     print("\nChiffre d'Afffaires par Pays:")
