@@ -5,7 +5,7 @@
 
 ## Contexte
 
-Ce dépôt contient le projet réalisé par une équipe de 3 étudiants dans le
+Ce dépôt contient le projet réalisé par le groupe 5 composé de  3 étudiants dans le
 cadre de la formation Python orientée analyse de données. L'objectif est de
 charger, nettoyer, analyser et visualiser un vrai jeu de données de
 transactions e-commerce, à travers trois livrables progressifs (V1, V2,
@@ -136,6 +136,6 @@ Finale ne redéfinit aucune nouvelle fonction : les graphiques et le menu sont
 briques V1/V2 déjà validées.
 
 ## Auteurs
-
-Projet réalisé par une équipe de 3 étudiants dans le cadre de la formation
-Python 360° (ASEGUIM).
+BAH THIERNO AMADOU KALIL
+CHESAN CRISTOPHER
+N'DEYE MARIAME BANGOURA
