@@ -141,25 +141,13 @@ couverts : barres (CA par pays), courbe (CA par mois), histogramme
 
 **Lancement de l'application et menu principal**
 
-![Lancement de l'application et menu principal](shots/1_lancement_menu.png)
-
-**Option 1 — CA par pays**
-
-![Option 1 — CA par pays](shots/2_option1_ca_pays.png)
-
-**Option 3 — Top produits**
-
-![Option 3 — Top produits](shots/3_option3_top_produits.png)
-
-**Option 4 — Export puis Option 5 — Quitter**
-
-![Option 4 — Export puis Option 5 — Quitter](shots/4_option4_export.png)
+![Lancement de l'application et menu principal]()
 
 #### Aperçu des graphiques générés
 
 **1. Chiffre d'affaires par pays (Top 10)**
 
-![CA par pays](graphs/1_ca_par_pays.png)
+![Top 10 CA par pays](https://github.com/khalil-44/Python_Project-Sujet-3-Campagnes-ventes-e-commerce/blob/1f01ba8de5b9f1b67c89b47f68b329283bd65d3c/Graphes/Top%2010%20CA%20par%20pays.png)
 
 **2. Distribution des paniers par pays (boxplot, échelle log)**
 
