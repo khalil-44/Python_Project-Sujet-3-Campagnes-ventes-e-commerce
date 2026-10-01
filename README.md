@@ -155,7 +155,7 @@ couverts : barres (CA par pays), courbe (CA par mois), histogramme
 
 **3. Chiffre d'affaires par mois**
 
-![CA par mois]()
+![CA par mois](https://github.com/khalil-44/Python_Project-Sujet-3-Campagnes-ventes-e-commerce/blob/f703037952a6f2b6b37612e4ebd51fe4cc6820dc/Graphes/CA%20par%20mois.png)
 
 **4. Distribution des montants de commande (0–1000 £)**
 
