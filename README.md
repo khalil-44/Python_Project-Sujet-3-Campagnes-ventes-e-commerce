@@ -151,7 +151,7 @@ couverts : barres (CA par pays), courbe (CA par mois), histogramme
 
 **2. Distribution des paniers par pays (boxplot, échelle log)**
 
-![Boxplot des paniers par pays]()
+![Boxplot des paniers par pays](https://github.com/khalil-44/Python_Project-Sujet-3-Campagnes-ventes-e-commerce/blob/5f23e31563a62bebc3702a6ff626fe1e49dcefb6/Graphes/Boxplot%20panier%20moyen%20par%20pays.png)
 
 **3. Chiffre d'affaires par mois**
 
