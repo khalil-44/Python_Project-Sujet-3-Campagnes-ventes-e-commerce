@@ -151,15 +151,15 @@ couverts : barres (CA par pays), courbe (CA par mois), histogramme
 
 **2. Distribution des paniers par pays (boxplot, échelle log)**
 
-![Boxplot des paniers par pays](graphs/2_boxplot_paniers.png)
+![Boxplot des paniers par pays]()
 
 **3. Chiffre d'affaires par mois**
 
-![CA par mois](graphs/3_ca_par_mois.png)
+![CA par mois]()
 
 **4. Distribution des montants de commande (0–1000 £)**
 
-![Histogramme des montants de commande](graphs/4_histogramme_montants.png)
+![Histogramme des montants de commande](https://github.com/khalil-44/Python_Project-Sujet-3-Campagnes-ventes-e-commerce/blob/85b3c7a55e6b2fdbb5828eec0e5ca3cd6174c9e9/Graphes/Histogramme_distribution%20des%20montants%20de%20commandes.png)
 
 ## Organisation du code
 
