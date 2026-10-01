@@ -136,13 +136,6 @@ Les 4 graphiques Matplotlib demandés dans le cahier des charges sont donc
 couverts : barres (CA par pays), courbe (CA par mois), histogramme
 (montants de commande) et boxplot (paniers par pays).
 
-
-#### Captures d'écran de l'application (terminal)
-
-**Lancement de l'application et menu principal**
-
-![Lancement de l'application et menu principal]()
-
 #### Aperçu des graphiques générés
 
 **1. Chiffre d'affaires par pays (Top 10)**
